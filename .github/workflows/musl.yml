@@ -13,7 +13,7 @@ jobs:
     - name: Set up environment
       run: |
         mkdir ps4
-       ./configure --target=x86_64-scei-ps4 --disable-shared CC="clang" CFLAGS="-fPIC -DPS4 -D_LIBUNWIND_IS_BAREMETAL=1" --prefix=./ps4
+        ./configure --target=x86_64-scei-ps4 --disable-shared CC="clang" CFLAGS="-fPIC -DPS4 -D_LIBUNWIND_IS_BAREMETAL=1" --prefix=./ps4
 
     - name: Build
       run: |
