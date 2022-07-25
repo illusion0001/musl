@@ -8,28 +8,25 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
     - name: Set up environment
       run: |
         mkdir ps4
-
-    - name: Configure
-      run: ./configure --target=x86_64-scei-ps4 --disable-shared CC="clang" CFLAGS="-fPIC -DPS4 -D_LIBUNWIND_IS_BAREMETAL=1" --prefix=./ps4
+       ./configure --target=x86_64-scei-ps4 --disable-shared CC="clang" CFLAGS="-fPIC -DPS4 -D_LIBUNWIND_IS_BAREMETAL=1" --prefix=./ps4
 
     - name: Build
-      run: make
+      run: |
+        make
+        make install
 
-    - name: Install
-      run: make install
-    
     - name: Create tarball
       run: |
         cd ps4
         tar -cvzf musl.tar.gz lib/* include/*
 
     - name: Upload musl
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: musl.tar.gz
         path: ps4/musl.tar.gz
